@@ -193,7 +193,7 @@ class Database:
 
     def __getitem__(self, index):
         if not (type(index) in (str, bytes)):
-            raise Exception("Expected str or bytes, got %s" % type(index))
+            raise ValueError("Expected str or bytes, got %s" % type(index))
         
         val = self.data[index]
 
@@ -203,14 +203,14 @@ class Database:
 
     def __setitem__(self, index, value):
         if not (type(index) in (str, bytes)):
-            raise Exception("Expected str or bytes, got %s" % type(index))
+            raise ValueError("Expected str or bytes, got %s" % type(index))
 
         self.data[index] = value
         return self.data[index]
 
     def __delitem__(self, index):
         if not (type(index) in (str, bytes)):
-            raise Exception("Expected str or bytes, got %s" % type(index))
+            raise ValueError("Expected str or bytes, got %s" % type(index))
 
         del self.data[index]
 

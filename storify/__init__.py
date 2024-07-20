@@ -6,9 +6,16 @@ from .dummylogger import DummyLogger
 from .database import Database
 
 class Storify:
-    # TODO: Add __getitem__, __setitem__, __delitem__ for easy access to databases
-
     def __init__(self, root="data", save_interval=60, log=DummyLogger(), models=[]):
+        """
+        Initialize the Storify instance.
+
+        Parameters:
+        - root (str): The root directory where databases will be stored. Default is "data".
+        - save_interval (int): The interval in seconds for automatic saving of databases. Default is 60 seconds.
+        - log (DummyLogger): Logger instance for logging messages. Default is an instance of DummyLogger.
+        - models (list): A list of model classes to be used with the Storify instance. Default is an empty list.
+        """
         self.root = root
         self.save_interval = save_interval
         self.log = log
@@ -21,7 +28,7 @@ class Storify:
 
         if not os.path.exists(os.path.join(self.root, ".backups")):
             os.mkdir(os.path.join(self.root, ".backups"))
-
+            
     def get_db(self,
                name,
                root={}):
@@ -69,3 +76,11 @@ class Storify:
 
     def flush(self):
         self.tick(force=True)
+
+    def __getitem__(self, name):
+        """Access a database by name using get_db."""
+        return self.get_db(name)
+
+    def __delitem__(self, name):
+        """Remove a database by name using remove_db."""
+        self.remove_db(name)
