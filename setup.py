@@ -2,15 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='storify',
-    version='0.1.0',
+    version='0.0.1',
     packages=find_packages(),
     include_package_data=True,
     license='MIT',
-    description='A short project description',
+    description='A lightweight database system for Python',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    author='Author Name',
-    author_email='author@example.com',
+    author='Ben Baptist',
+    author_email='sawham6@gmail.com',
     url='https://github.com/benbaptist/storify',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -23,6 +23,6 @@ setup(
         'Programming Language :: Python :: 3.10',
     ],
     install_requires=[
-        # List your package dependencies here
+        'msgpack',
     ],
 )

@@ -68,24 +68,16 @@ class Database:
         return data
     
     def decode_type(self, data):
-        if isinstance(data, dict) and '__model_type__' in data:
+        if isinstance(data, dict):
+            model_class = next((cls for cls in self.models if f"__{cls.__name__}__" in data), None)
 
-            model_type = data.pop('__model_type__')
-            model_class = next((cls for cls in self.models if cls.__name__ == model_type), None)
-
-            if model_class is None:
-                raise ValueError(f"Model type '{model_type}' not found.")
-
-            if model_class:
-                try:
-                    return model_class()._from_dict(data)
-                except:
-                    print(traceback.format_exc())
-                    print("Failed to decode model", data)
-                    return data
-
+            try:
+                return model_class()._from_dict(data)
+            except Exception as e:
+                self.log.error(f"Failed to decode model: {data} with error: {str(e)}")
+                return data
+        
         return data
-
     def unpack(self, path, raw=False):
         try:
             with open(path, "rb") as f:

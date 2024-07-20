@@ -5,15 +5,13 @@ import random
 
 class Person(Model):
     def __init__(self) -> None:
-        super().__init__()  # Initialize the parent class
-
         self.name = random.choice(["Greg", "John", "Jane", "Bob", "Alice", "Tom", "Jerry", "SpongeBob", "Patrick", "Squidward"])
         self.age = random.randrange(1, 100)
         self.food = random.choice(["Pizza", "Burger", "Salad", "Ice Cream", "Sushi"])
 
 def main():
     # Initialize Storify with a custom root directory
-    storify = Storify(root="example_data", models=[Person])
+    storify = Storify(models=[Person])
     db_name = "example_db"
 
     # Check if the database exists
@@ -44,10 +42,14 @@ def main():
     db["people"].append(person)
 
     # Print out all people in our database
+    # Each time this script is run, a new person is added and printed.
+    # People added on previous script runs will still use the Person class model,
+    # thanks to Storify's ORM magic. 
     for person in db["people"]:
         print(f"{person.name} is {person.age} years old and likes {person.food}")
 
     # Flush all databases (force save)
+    # Typically, instead of doing this, your code would run storify.tick() frequently to keep all I/O in one thread
     storify.flush()
 
 if __name__ == "__main__":

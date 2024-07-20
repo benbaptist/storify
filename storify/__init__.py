@@ -6,6 +6,8 @@ from .dummylogger import DummyLogger
 from .database import Database
 
 class Storify:
+    # TODO: Add __getitem__, __setitem__, __delitem__ for easy access to databases
+
     def __init__(self, root="data", save_interval=60, log=DummyLogger(), models=[]):
         self.root = root
         self.save_interval = save_interval
@@ -54,26 +56,16 @@ class Storify:
         os.remove(path)
 
     def tick(self, force=False):
-        a = len(self.databases)
-        i = 0
+        # Filter out defunct databases
+        active_dbs = [db for db in self.databases if not db.defunct]
 
-        # Safely iterate through databases without any RuntimeErrors
-        while i < a:
-            db = self.databases[i]
-
-            if db.defunct:
-                i += 1
-
-                continue
-
+        for db in active_dbs:
             if force:
                 db.flush()
             else:
-                 # Saves on a regular interval based off of self.save_interval
+                # Saves on a regular interval based off of self.save_interval
                 if time.time() - db.last_flush > self.save_interval:
                     db.flush()
-
-            i += 1
 
     def flush(self):
         self.tick(force=True)

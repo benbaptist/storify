@@ -1,6 +1,12 @@
-import json
-
 class Model:
+    @property
+    def _key(self):
+        return f"__{self.__class__.__name__}__"
+
+    @classmethod
+    def _keyname(cls):
+        return f"__{cls.__name__}__"
+    
     def __new__(cls, **kwargs):
         instance = super(Model, cls).__new__(cls)
         for key, value in kwargs.items():
@@ -8,15 +14,13 @@ class Model:
         return instance
 
     def _to_dict(self):
-        # Include the class name in the dictionary for identification
-        data = self.__dict__.copy()
-        data['__model_type__'] = self.__class__.__name__
-        return data
+        return {
+            self._key: self.__dict__.copy()
+        }
 
     def _from_dict(self, data):
-        # Populate self with the information from data
-        for key, value in data.items():
-            setattr(self, key, value)
+        if self._key in data:
+            self.__dict__.update(data[self._key])
 
         return self
 
