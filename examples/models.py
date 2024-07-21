@@ -1,6 +1,13 @@
 from storify import Storify
 from storify.model import Model
 
+# This code showcases the use of the Storify ORM to manage a simple database of books.
+# It defines a Book model with attributes for title, author, and year of publication.
+# The main function initializes a Storify instance, creates a new database for books,
+# and demonstrates how to add multiple book instances to the database.
+# It also illustrates how to retrieve and print out all books stored in the database,
+# including those added in previous runs, thanks to Storify's ORM capabilities.
+
 class Book(Model):
     def __init__(self) -> None:
         self.title = ""
