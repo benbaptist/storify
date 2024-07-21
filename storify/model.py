@@ -7,12 +7,6 @@ class Model:
     def _keyname(cls):
         return f"__{cls.__name__}__"
     
-    def __new__(cls, **kwargs):
-        instance = super(Model, cls).__new__(cls)
-        for key, value in kwargs.items():
-            setattr(instance, key, value)
-        return instance
-
     def _to_dict(self):
         return {
             self._key: self.__dict__.copy()

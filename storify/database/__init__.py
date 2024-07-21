@@ -12,12 +12,12 @@ class Database:
     def __init__(self, name, root, log, rootdata={}, models=[]):
         self.name = name
         self.root = root
-        self.last_flush = time.time()
         self.data = rootdata
         self.backups = None
         self.log = log
         self.models = models
 
+        self.last_flush = time.time()
         self.destroyed = False
         self.defunct = False
 
@@ -70,6 +70,9 @@ class Database:
     def decode_type(self, data):
         if isinstance(data, dict):
             model_class = next((cls for cls in self.models if f"__{cls.__name__}__" in data), None)
+
+            if model_class is None:
+                return data
 
             try:
                 return model_class()._from_dict(data)

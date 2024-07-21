@@ -1,6 +1,6 @@
 class DummyLogger:
-    def info(self, msg): pass
-    def debug(self, msg): pass
-    def error(self, msg): pass
-    def warning(self, msg): pass
-    def traceback(self, msg): pass
+    def info(self, msg): print(f"INFO: {msg}")
+    def debug(self, msg): print(f"DEBUG: {msg}")
+    def error(self, msg): print(f"ERROR: {msg}")
+    def warning(self, msg): print(f"WARNING: {msg}")
+    def traceback(self, msg): print(f"TRACEBACK: {msg}")
