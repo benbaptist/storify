@@ -28,7 +28,7 @@ def main():
     # Initialize a new database
     db = storify.get_db(name=db_name)
 
-    # Add some data to the database
+    # Add some pointless data to the database
     db["key"] = "value"
     
     if "randon_number" not in db:
@@ -37,9 +37,6 @@ def main():
     # Get some data from the database
     print(db["key"])
     print(f"Our random number is {db['randon_number']}")
-
-    # Remove some data from the database
-    del db["key"]
 
     # Use a model
     if "people" not in db:
@@ -53,7 +50,7 @@ def main():
     # People added on previous script runs will still use the Person class model,
     # thanks to Storify's ORM magic. 
     for person in db["people"]:
-        print(f"{person.name} is {person.age} years old and likes {person.food}")
+        print(f"- {person.name} is {person.age} years old and likes {person.food}")
 
     # Flush all databases (force save)
     # Typically, instead of doing this, your code would run storify.tick() frequently to keep all I/O in one thread
