@@ -1,0 +1,8 @@
+- [ ] More Pythonic top-level API for creating and managing databases
+- [ ] Async I/O
+- [ ] Better logging
+- [ ] Better error handling
+- [ ] Better backup and auto-recovery
+- [ ] Tools for exploring databases
+- [ ] Better documentation
+- [ ] Do all TODOs in code

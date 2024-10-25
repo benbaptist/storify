@@ -1,13 +1,17 @@
 # Storify
 
-Storify is a lightweight Python-based database system that utilizes msgpack for efficient data serialization. It provides a robust framework for data storage and retrieval, with an optional ORM model for interaction with data. Storify supports automatic backups and error handling, ensuring data integrity and reliability. Easily create, rename, and remove databases while benefiting from a logging mechanism that tracks all operations.
+Storify is a dead-simple, lightweight Python database library that uses msgpack for efficient data serialization. 
+
+It provides a framework for data storage and retrieval, with an optional ORM model for interaction with data. 
+
+Storify supports automatic backups and error handling, ensuring data integrity and reliability. 
 
 ## Features
 
 - Create and manage multiple msgpack-based databases with ease.
 - Lightweight ORM-esque model for easy interaction with data.
 - Automatic backups and data flushing to prevent data loss.
-- Built-in error handling to manage database corruption and loading issues.
+- Built-in error handling to automatically recover from database corruption and loading issues.
 - Configurable save intervals for optimized performance.
 
 ## Installation
@@ -46,4 +50,4 @@ print(f"key2: {db['key2']}")
 storify.flush()
 ```
 
-For more complete examples, please check the `examples` folder.
+For more complete examples, including how to use the ORM, please check the `examples` folder.
