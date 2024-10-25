@@ -63,6 +63,10 @@ class Storify:
         os.remove(path)
 
     def tick(self, force=False):
+        """
+        Tick all open databases. This will flush them to disk if they haven't been flushed recently.
+        """
+        
         # Filter out defunct databases
         active_dbs = [db for db in self.databases if not db.defunct]
 
@@ -75,6 +79,9 @@ class Storify:
                     db.flush()
 
     def flush(self):
+        """
+        Flush all open databases to disk.
+        """
         self.tick(force=True)
 
     def __getitem__(self, name):

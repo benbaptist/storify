@@ -10,6 +10,9 @@ class Backups:
         self.max_backups = 5
 
     def backup(self):
+        """
+        Create a backup of the database.
+        """
         backup_id = self.latest + 1
 
         shutil.copy(
@@ -46,6 +49,9 @@ class Backups:
 
     @property
     def list(self):
+        """
+        List all backups of the database.
+        """
         if not os.path.exists(self.backup_path):
             os.makedirs(self.backup_path)
             return []
@@ -68,6 +74,9 @@ class Backups:
 
     @property
     def last(self):
+        """
+        Get the oldest backup of the database.
+        """
         backups = self.list
 
         return backups[0]

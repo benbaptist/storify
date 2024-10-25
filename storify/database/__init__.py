@@ -26,6 +26,20 @@ class Database:
         self.load()
 
     def load(self, path=None):
+        """
+        Load the database from a file. Typically, you don't need to call this yourself.
+
+        Args:
+            path (str, optional): The path to the database file. If not provided,
+                                  it defaults to the standard path based on the database name.
+
+        Raises:
+            DatabaseLoadError: If the database cannot be loaded from the main file or any backups.
+
+        This method attempts to load the database from the specified file. If the main file
+        is corrupted, it tries to load from available backups. If all attempts fail, it raises
+        a DatabaseLoadError.
+        """
         if not path:
             path = os.path.join(self.root, "%s.mpack" % self.name)
 
@@ -81,6 +95,7 @@ class Database:
                 return data
         
         return data
+    
     def unpack(self, path, raw=False):
         try:
             with open(path, "rb") as f:
@@ -129,6 +144,9 @@ class Database:
         return walk(blob)
     
     def flush(self):
+        """
+        Flush the database to disk.
+        """
         if self.destroyed or self.defunct:
             return
 
@@ -170,13 +188,19 @@ class Database:
                 pass
 
     def close(self):
+        """
+        Close the database. This will flush the database to disk and set the database as defunct.
+        """
         self.flush()
 
         self.data = None
         self.defunct = True
 
     def destroy(self):
-        self.data = None
+        """
+        Destroy the database. This will delete the database file from disk, but it will not remove backups.
+        """
+        self.close()
 
         path = os.path.join(self.root, "%s.mpack" % self.name)
 
