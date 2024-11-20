@@ -8,8 +8,9 @@ class Model:
         return f"__{cls.__name__}__"
     
     def _to_dict(self):
+        filtered_dict = {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
         return {
-            self._key: self.__dict__.copy()
+            self._key: filtered_dict
         }
 
     def _from_dict(self, data):
