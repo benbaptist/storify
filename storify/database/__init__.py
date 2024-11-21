@@ -91,7 +91,7 @@ class Database:
             try:
                 return model_class()._from_dict(data)
             except Exception as e:
-                self.log.error(f"Failed to decode model: {data} with error: {str(e)}")
+                self.log.traceback(f"Failed to decode model: {data} with error: {str(e)}")
                 return data
         
         return data

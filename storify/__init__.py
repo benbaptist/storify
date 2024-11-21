@@ -2,11 +2,11 @@ import os
 import time
 import copy
 
-from .dummylogger import DummyLogger
+from .logger import Logger
 from .database import Database
 
 class Storify:
-    def __init__(self, root="data", save_interval=60, log=DummyLogger(), models=[]):
+    def __init__(self, root="data", save_interval=60, log=None, verbose=False, models=[]):
         """
         Initialize the Storify instance.
 
@@ -18,7 +18,7 @@ class Storify:
         """
         self.root = root
         self.save_interval = save_interval
-        self.log = log
+        self.log = log if log is not None else Logger(level=logging.DEBUG if verbose else logging.INFO)
         self.models = models
 
         self.databases = []
