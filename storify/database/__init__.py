@@ -27,18 +27,14 @@ class Database:
 
     def load(self, path=None):
         """
-        Load the database from a file. Typically, you don't need to call this yourself.
+        Load the database from a file.
 
-        Args:
-            path (str, optional): The path to the database file. If not provided,
-                                  it defaults to the standard path based on the database name.
+        :param path: The path to the database file. If not provided, defaults to the standard path based on the database name.
+        :type path: str, optional
+        :raises DatabaseLoadError: If the database cannot be loaded from the main file or any backups.
 
-        Raises:
-            DatabaseLoadError: If the database cannot be loaded from the main file or any backups.
-
-        This method attempts to load the database from the specified file. If the main file
-        is corrupted, it tries to load from available backups. If all attempts fail, it raises
-        a DatabaseLoadError.
+        Typically, you don't need to call this yourself. This method attempts to load the database from the specified file. 
+        If the main file is corrupted, it tries to load from available backups. If all attempts fail, it raises a DatabaseLoadError.
         """
         if not path:
             path = os.path.join(self.root, "%s.mpack" % self.name)
@@ -144,8 +140,16 @@ class Database:
         return walk(blob)
     
     def flush(self):
-        """
-        Flush the database to disk.
+        """Flush the database to disk.
+
+        Writes all pending changes in the database to disk storage. Creates a temporary file,
+        writes the data, and then safely moves it to the final location. Before writing, creates
+        a backup of the existing database file if one exists.
+
+        If the database has been marked as destroyed or defunct, returns without performing
+        any operations.
+
+        :raises IOError: If there is an error writing the data to disk, typically due to insufficient storage space
         """
         if self.destroyed or self.defunct:
             return
@@ -189,7 +193,10 @@ class Database:
 
     def close(self):
         """
-        Close the database. This will flush the database to disk and set the database as defunct.
+        Close the database.
+        
+        Flushes the database to disk and marks it as defunct. After closing,
+        the database can no longer be used.
         """
         self.flush()
 
@@ -198,7 +205,10 @@ class Database:
 
     def destroy(self):
         """
-        Destroy the database. This will delete the database file from disk, but it will not remove backups.
+        Destroy the database.
+        
+        Deletes the database file from disk. This operation cannot be undone,
+        but backups are preserved.
         """
         self.close()
 
