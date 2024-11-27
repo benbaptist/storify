@@ -75,9 +75,9 @@ class Database:
         elif isinstance(data, (str, int, float, bool, type(None))):
             return data
         elif isinstance(data, Model):
-            return data._to_dict()  # Serialize Model instances
+            return {data._keyname(): data._to_dict()}  # Serialize Model instances
         elif isinstance(data, type) and issubclass(data, Model):
-            return data._to_dict()  # Serialize subclassed Model instances
+            return {data._keyname(): data._to_dict()}  # Serialize subclassed Model instances
         
         return data
     
@@ -89,7 +89,7 @@ class Database:
                 return data
 
             try:
-                return model_class()._from_dict(data)
+                return model_class()._from_dict(data[model_class._keyname()])
             except Exception as e:
                 self.log.traceback(f"Failed to decode model: {data} with error: {str(e)}")
                 return data

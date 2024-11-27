@@ -9,14 +9,10 @@ class Model:
     
     def _to_dict(self):
         filtered_dict = {k: v for k, v in self.__dict__.items() if not k.startswith('_')}
-        return {
-            self._key: filtered_dict
-        }
+        return filtered_dict
 
     def _from_dict(self, data):
-        if self._key in data:
-            self.__dict__.update(data[self._key])
-
+        self.__dict__.update(data)
         return self
 
     @classmethod
