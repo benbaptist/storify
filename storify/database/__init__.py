@@ -1,7 +1,6 @@
 import msgpack
 import os
 import time
-import traceback
 import shutil
 
 from ..exceptions import *
@@ -79,7 +78,7 @@ class Database:
     
     def decode_type(self, data):
         if isinstance(data, dict):
-            model_class = next((cls for cls in self.models if f"__{cls.__name__}__" in data), None)
+            model_class = next((cls for cls in self.models if cls._keyname() in data), None)
 
             if model_class is None:
                 return data

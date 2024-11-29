@@ -43,7 +43,6 @@ def main():
         db["people"].append(person)
 
     for person in db["people"]:
-        # print(person)
         print(f"{person.name} is {person.age} years old")
 
     storify.flush()

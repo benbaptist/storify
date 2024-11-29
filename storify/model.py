@@ -1,17 +1,10 @@
 class Model:
-    @property
-    def _key(self):
-        """
-        This method is used to get the key for the model.
-        By default, it returns the class name with double underscores prepended and appended.
-        """
-        return f"__{self.__class__.__name__}__"
-
     @classmethod
     def _keyname(cls):
         """
         This method is used to get the key name for the model.
         By default, it returns the class name with double underscores prepended and appended.
+        You can override this method in your model to customize the key name.
         """
         return f"__{cls.__name__}__"
     
