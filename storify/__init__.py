@@ -54,7 +54,13 @@ class Storify:
         """
         _root = copy.deepcopy(root)
 
-        db = Database(name, self.root, self.log, rootdata=_root, models=self.models)
+        db = Database(
+            name=name,
+            root=self.root,
+            log=self.log,
+            rootdata=_root,
+            models=self.models
+        )
         self.databases.append(db)
 
         return db
@@ -67,7 +73,11 @@ class Storify:
         :return: Database instance
         :rtype: Database
         """
-        return Database(path=path, log=self.log, models=self.models)
+        return Database(
+            path=path, 
+            log=self.log,
+            models=self.models
+        )
 
     def db_exists(self, name):
         """Check if a database exists.
