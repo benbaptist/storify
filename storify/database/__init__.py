@@ -178,11 +178,14 @@ class Database:
 
             self.last_flush = time.time()
         except IOError:
-            self.log.error(
+            self.log.traceback(
                 "An error occurred while attempting to write data to disk. "
                 "This may be due to insufficient storage space. Please ensure "
                 "there is adequate space available before retrying the operation."
             )
+
+            self.log.debug(f"tmp_path: {tmp_path}")
+            self.log.debug(f"final_path: {final_path}")
 
             # Try to clean up
             try:
