@@ -8,8 +8,12 @@ from .backups import Backups
 from ..model import Model
 
 class Database:
-    def __init__(self, name, root, log, rootdata={}, models=[]):
+    def __init__(self, name=None, path=None, root=None, log=None, rootdata={}, models=[]):
+        if name is None and path is None and root is None:
+            raise ValueError("At least 'path', or 'name' and 'root' must be provided.")
+        
         self.name = name
+        self._path = path
         self.root = root
         self.data = rootdata
         self.backups = None
@@ -24,6 +28,13 @@ class Database:
 
         self.load()
 
+    @property
+    def path(self):
+        if self._path:
+            return self._path
+
+        return os.path.join(self.root, "%s.mpack" % self.name)
+
     def load(self, path=None):
         """
         Load the database from a file.
@@ -36,7 +47,7 @@ class Database:
         If the main file is corrupted, it tries to load from available backups. If all attempts fail, it raises a DatabaseLoadError.
         """
         if not path:
-            path = os.path.join(self.root, "%s.mpack" % self.name)
+            path = self.path
 
         if os.path.exists(path):
 
@@ -154,8 +165,8 @@ class Database:
             return
 
         # Save code here
-        final_path = os.path.join(self.root, "%s.mpack" % self.name)
-        tmp_path = os.path.join(self.root, "%s.mpack.tmp" % self.name)
+        final_path = self.path
+        tmp_path = self.path + ".tmp"
 
         # Backup before flushing
         if os.path.exists(final_path):

@@ -58,6 +58,16 @@ class Storify:
         self.databases.append(db)
 
         return db
+    
+    def get_db_by_path(self, path):
+        """Get a database instance directly by its path, unmanaged by the root Storify path.
+
+        :param path: Path to the database file
+        :type path: str
+        :return: Database instance
+        :rtype: Database
+        """
+        return Database(path=path, log=self.log, models=self.models)
 
     def db_exists(self, name):
         """Check if a database exists.
