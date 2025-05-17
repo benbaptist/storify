@@ -1,6 +1,6 @@
 Contributing
 ============
 
-Contributions are welcome! Please read the contribution guidelines before submitting a pull request.
+Contributions are welcome! It's just a small project that I work on in my free time, so I'm not sure how much I'll be able to do.
 
-(This is a placeholder. You should add guidelines on how to contribute, report bugs, suggest features, coding standards, etc.) 
+If you have any ideas for features or general improvements, please let me know.
