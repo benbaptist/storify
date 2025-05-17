@@ -3,50 +3,50 @@ API Reference
 
 This section provides an auto-generated API reference for the ``storify`` package.
 
-Main Package
-------------
+Core Package (`storify`)
+------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify
-   :members:
-
-Storify Core (`storify.__init__`)
------------------------------------
-
-.. automodule:: storify.__init__
-   :members:
+   storify
 
 Models (`storify.model`)
 --------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify.model
-   :members:
+   storify.model
 
 Exceptions (`storify.exceptions`)
 ---------------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify.exceptions
-   :members:
+   storify.exceptions
 
 Logger (`storify.logger`)
 -------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify.logger
-   :members:
+   storify.logger
 
-Database (`storify.database`)
------------------------------
+Database Core (`storify.database`)
+----------------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify.database
-   :members:
-
-Database Core (`storify.database.__init__`)
---------------------------------------------
-
-.. automodule:: storify.database.__init__
-   :members:
+   storify.database
 
 Database Backups (`storify.database.backups`)
 ---------------------------------------------
+.. autosummary::
+   :toctree: generated
+   :template: module.rst
 
-.. automodule:: storify.database.backups
-   :members: 
+   storify.database.backups 

@@ -9,6 +9,7 @@ release = '0.0.11'
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.napoleon', # For Google and NumPy style docstrings
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
@@ -17,7 +18,7 @@ extensions = [
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '.venv/'] # Added .venv/
 
 html_theme = 'sphinx_rtd_theme' # A popular theme
 
@@ -32,4 +33,7 @@ source_suffix = {
 }
 
 # Autodoc settings
-autodoc_member_order = 'bysource' 
+autodoc_member_order = 'bysource'
+
+# Autosummary settings
+autosummary_generate = ['api/index.rst'] # Target specific file for stub generation 
