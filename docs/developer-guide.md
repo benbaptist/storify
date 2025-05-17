@@ -16,16 +16,9 @@ This guide provides API developers with the information needed to utilize the `s
 
 ## 2. Installation
 
-Currently, Storify is not on PyPI. To install it, you would typically clone the repository and install it from the source using the provided `setup.py`:
-
+Install using pip:
 ```bash
-git clone <repository_url>  # Replace with actual URL
-cd storify
-python setup.py install  # Or `pip install .`
-```
-Ensure you have `msgpack` installed as a dependency:
-```bash
-pip install msgpack
+pip install storify
 ```
 
 ## 3. Core Concepts
