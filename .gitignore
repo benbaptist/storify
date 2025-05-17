@@ -1,3 +1,5 @@
+.DS_Store
+
 # Storify-specific
 release_to_pypi.sh
 example_data/
