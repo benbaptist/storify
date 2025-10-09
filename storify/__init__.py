@@ -52,6 +52,13 @@ class Storify:
         :return: Database instance
         :rtype: Database
         """
+        # Check if database is already loaded
+        try:
+            self.get_loaded_db(name)
+            raise ValueError(f"Database '{name}' is already loaded.")
+        except ValueError:
+            pass
+        
         _root = copy.deepcopy(root)
 
         db = Database(
@@ -64,6 +71,19 @@ class Storify:
         self.databases.append(db)
 
         return db
+
+    def get_loaded_db(self, name):
+        """Get a currently loaded database instance by name.
+
+        :param name: Name of the database to get
+        :type name: str
+        :return: Database instance if found, None otherwise
+        :rtype: Database or None
+        """
+        for db in self.databases:
+            if db.name == name and not db.defunct:
+                return db
+        raise ValueError(f"Database '{name}' is not currently loaded.")
     
     def get_db_by_path(self, path):
         """Get a database instance directly by its path, unmanaged by the root Storify path.
