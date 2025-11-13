@@ -170,12 +170,12 @@ class Database:
 
         # Backup before flushing
         if os.path.exists(final_path):
-            self.log.debug("Backing up db...")
+            self.log.debug(f"Backing up db `{self.name}`...")
             self.backups.backup()
 
         try:
             with open(tmp_path, "wb") as f:
-                self.log.warning("Syncing data to disk")
+                self.log.warning(f"Syncing data to disk for db `{self.name}`")
 
                 blob = msgpack.packb(
                     self.data,
